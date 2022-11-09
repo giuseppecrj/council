@@ -217,6 +217,10 @@ contract CoreVoting is Authorizable, ReentrancyBlock, ICoreVoting {
         // No votes after the vote period is over
         require(proposals[proposalId].created != 0, "proposal does not exist");
         require(block.number <= proposals[proposalId].expiration, "Expired");
+        require(
+            votingVaults.length == extraVaultData.length,
+            "array length mismatch"
+        );
 
         uint128 votingPower;
 
